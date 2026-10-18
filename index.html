@@ -658,7 +658,7 @@ textarea:focus { border-color: #91d8f5; }
         ></button>
     </div>
 
-    <p class="candle-hint">ลองกดเป่าเทียนตรงเปลวไปดูสิ้้565266</p>
+    <p class="candle-hint">อ่าว! เทียนแม่งดับไปแล้ว อ่อววว หนูเป่าไปแล้วนี่เอง555655 ขอให้มีความสุขนะ^^</p>
 </section>
 
 <!-- PAGE 2: SURPRISE -->
@@ -862,7 +862,7 @@ textarea:focus { border-color: #91d8f5; }
 
         <p id="revealProgress">ภาพที่ซ่อนอยู่ 0%</p>
         <button id="openEnvelopeButton" onclick="openEnvelopeStep()">เปิดซองจดหมาย</button>
-        <button id="lastPageButton" onclick="showPage(6)" style="display:none">ไปหน้าสุดท้าย</button>
+        <button id="lastPageButton" onclick="showPage(6)" style="display:none" disabled>รออีก 10 วิ...</button>
         <p>Happy Birthday, my favorite person.</p>
         <p>ข้อความสุดท้าย : ขอบคุณมากนะที่มาอยู่ด้วยกันกับพี่มาจนถึงตอนนี้ พี่มีความสุขมากเยยเวลาได้อยู่กับหนู พี่รักหนูนะ เเละก็ สุขสันต์วันเกิดั้วว^^ ♡</p>
     </div>
@@ -880,6 +880,8 @@ let surpriseTimer = null;
 let messageHasBeenSent = false;
 let envelopeStep = 0;
 const envelopeTotalSteps = 4;
+let hbdCooldownInterval = null;
+let hbdCooldownComplete = false;
 
 /* CHANGE PAGE */
 
@@ -887,7 +889,7 @@ function showPage(pageNumber) {
     if (pageNumber === 5 && !messageHasBeenSent) {
         return;
     }
-    if (pageNumber === 6 && (envelopeStep < envelopeTotalSteps || !messageHasBeenSent)) {
+    if (pageNumber === 6 && (envelopeStep < envelopeTotalSteps || !messageHasBeenSent || !hbdCooldownComplete)) {
         return;
     }
 
@@ -939,9 +941,34 @@ function openEnvelopeStep() {
     } else {
         document.getElementById("openEnvelopeButton").style.display = "none";
         document.getElementById("lastPageButton").style.display = "inline-block";
-        document.getElementById("envelopeHint").textContent = "เปิดครบแล้ว ขอให้วันนี้เป็นวันที่พิเศษนะ ♡";
+        document.getElementById("envelopeHint").textContent = "ภาพนี้พี่ตั้งใจวาดให้หนุเยยน้าา ถึงจะเป็นงานดองตั้งเเต่ที่พี่ขอocตัวคนพี่ก็เถอะนะ5556565 เเต่เอามาดัดเเปลงเป็นภาพเเฮปเเย้วว ♡";
+        startHbdCooldown();
         for (let i = 0; i < 12; i++) setTimeout(createHeart, i * 140);
     }
+}
+
+/* 10-SECOND COOLDOWN BEFORE THE FINAL HBD PAGE */
+function startHbdCooldown() {
+    const button = document.getElementById("lastPageButton");
+    let secondsLeft = 10;
+    hbdCooldownComplete = false;
+    button.disabled = true;
+    button.style.display = "inline-block";
+    button.textContent = `ไปหน้า HBD ได้ใน ${secondsLeft} วิ`;
+
+    if (hbdCooldownInterval) clearInterval(hbdCooldownInterval);
+    hbdCooldownInterval = setInterval(() => {
+        secondsLeft--;
+        if (secondsLeft > 0) {
+            button.textContent = `ไปหน้า HBD ได้ใน ${secondsLeft} วิ`;
+        } else {
+            clearInterval(hbdCooldownInterval);
+            hbdCooldownInterval = null;
+            hbdCooldownComplete = true;
+            button.disabled = false;
+            button.textContent = "ไปหน้าสุดท้าย HBD";
+        }
+    }, 1000);
 }
 
 /* BLOW OUT CANDLE */
