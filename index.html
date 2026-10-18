@@ -410,12 +410,12 @@ textarea {
 
 textarea:focus { border-color: #91d8f5; }
 
-/* PAGE 5: FINAL ARTWORK */
+/* PAGE 5: OPEN THE BIG ENVELOPE */
 
-.final-card {
-    width: min(100%, 900px);
-    padding: 24px;
-    background: rgba(255,255,255,.85);
+.envelope-card {
+    width: min(100%, 760px);
+    padding: clamp(18px, 4vw, 34px);
+    background: rgba(255,255,255,.88);
     border: 2px solid var(--pink);
     border-radius: 26px;
     box-shadow: 0 12px 35px #d9bcd355;
@@ -423,13 +423,112 @@ textarea:focus { border-color: #91d8f5; }
     z-index: 2;
 }
 
-.final-art {
+.envelope-stage {
+    width: min(100%, 560px);
+    margin: 25px auto;
+    position: relative;
+    padding: 18px 18px 0;
+}
+
+.reveal-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    max-height: 65vh;
+    margin: 0 auto -2px;
+    overflow: hidden;
+    border-radius: 16px 16px 0 0;
+    background: #fff7fb;
+    border: 2px solid #e9aac4;
+    box-shadow: 0 5px 18px #b77b9630;
+}
+
+.reveal-art {
     display: block;
     width: 100%;
-    max-height: 78vh;
+    height: 100%;
     object-fit: contain;
-    border-radius: 18px;
-    margin: 18px auto;
+    background: #fff7fb;
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path .65s cubic-bezier(.2,.75,.25,1);
+}
+
+.envelope-body {
+    height: clamp(125px, 25vw, 190px);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, #ffd9e8, #f3a9c4);
+    border: 2px solid #e58eae;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 12px 25px #d9bcd355;
+    margin-top: 0;
+}
+
+.envelope-body::before,
+.envelope-body::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.envelope-body::before {
+    background: linear-gradient(35deg, transparent 49.5%, #f8bfd4 50%) left / 50% 100% no-repeat,
+                linear-gradient(-35deg, transparent 49.5%, #f8bfd4 50%) right / 50% 100% no-repeat;
+}
+
+.envelope-flap {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56%;
+    background: #f8bfd4;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transition: transform .7s ease, opacity .5s ease;
+    filter: drop-shadow(0 3px 2px #b77b9630);
+}
+
+.envelope-stage.opened .envelope-flap {
+    transform: rotateX(180deg);
+    opacity: .2;
+}
+
+.envelope-seal {
+    position: absolute;
+    z-index: 4;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #fff5fa;
+    color: #df7fa4;
+    border: 2px solid #e58eae;
+    font-size: 25px;
+    box-shadow: 0 3px 10px #b77b9630;
+    transition: opacity .3s ease;
+}
+
+.envelope-stage.opened .envelope-seal { opacity: 0; }
+
+.final-art-error { display: none; color: #b56f8c; }
+
+/* PAGE 6: LAST PAGE */
+
+#page6 { gap: 22px; }
+
+.hbd-title {
+    margin: 0;
+    color: var(--pink-dark);
+    font-size: clamp(64px, 18vw, 150px);
+    letter-spacing: .08em;
+    text-shadow: 0 8px 0 #f8d6e4, 0 14px 30px #d9bcd355;
 }
 
 /* HEART EFFECT */
@@ -583,14 +682,14 @@ textarea:focus { border-color: #91d8f5; }
     <div class="greeting-card">
 
         <img
-            src="images/chibi-boy-transparent.png"
+            src="images/chibi-boy-transparent.PNG"
             class="card-chibi card-chibi-boy"
             alt=""
             aria-hidden="true"
         >
 
         <img
-            src="images/chibi-girl-transparent.png"
+            src="images/chibi-girl-transparent.PNG"
             class="card-chibi card-chibi-girl"
             alt=""
             aria-hidden="true"
@@ -737,38 +836,58 @@ textarea:focus { border-color: #91d8f5; }
     </div>
 </section>
 
-<!-- PAGE 5: FINAL ARTWORK -->
+<!-- PAGE 5: OPEN THE ENVELOPE TO REVEAL THE ART -->
 
 <section class="page" id="page5">
-    <div class="final-card">
-        <h1>ภาพพิเศษสำหรับหนู^^</h1>
-        <p>ภาพนี้พี่ตั้งใจวาดให้หนุเยยน้าา ถึงจะเป็นงานดองตั้งเเต่ที่พี่ขอocตัวคนพี่ก็เถอะนะ5556565 เเต่เอามาดัดเเปลงเป็นภาพเเฮปเเย้วว ♡</p>
+    <div class="envelope-card">
+        <h1>จดหมายฉบับสุดท้าย ♡</h1>
+        <p id="envelopeHint">กดเปิดซองจดหมาย แล้วภาพพิเศษจะค่อย ๆ ปรากฏออกมานะ</p>
 
-        <img
-            class="final-art"
-            src="images/final-art.jpg"
-            alt="ภาพวาดของขวัญวันเกิด"
-            onerror="this.style.display='none'; document.getElementById('imageError').style.display='block';"
-        >
+        <div class="envelope-stage" id="envelopeStage">
+            <div class="reveal-frame">
+                <img
+                    id="revealArt"
+                    class="reveal-art"
+                    src="images/final-art.jpg"
+                    alt="ภาพวาดของขวัญวันเกิด"
+                    onerror="this.style.display='none'; document.getElementById('finalArtError').style.display='block'; document.getElementById('envelopeHint').textContent='ตรวจสอบชื่อไฟล์ภาพในโฟลเดอร์ images อีกครั้งนะ';"
+                >
+                <p id="finalArtError" class="final-art-error small-note">ยังไม่พบภาพ กรุณาตรวจสอบไฟล์ images/final-art.jpg</p>
+            </div>
+            <div class="envelope-body">
+                <div class="envelope-flap"></div>
+                <div class="envelope-seal">♡</div>
+            </div>
+        </div>
 
-        <p id="imageError" class="small-note" style="display:none">
-            ยังไม่พบภาพ กรุณาตรวจสอบไฟล์ images/final-art.jpg
-        </p>
-
+        <p id="revealProgress">ภาพที่ซ่อนอยู่ 0%</p>
+        <button id="openEnvelopeButton" onclick="openEnvelopeStep()">เปิดซองจดหมาย</button>
+        <button id="lastPageButton" onclick="showPage(6)" style="display:none">ไปหน้าสุดท้าย</button>
         <p>Happy Birthday, my favorite person.</p>
         <p>ข้อความสุดท้าย : ขอบคุณมากนะที่มาอยู่ด้วยกันกับพี่มาจนถึงตอนนี้ พี่มีความสุขมากเยยเวลาได้อยู่กับหนู พี่รักหนูนะ เเละก็ สุขสันต์วันเกิดั้วว^^ ♡</p>
     </div>
+</section>
+
+<!-- PAGE 6: HBD -->
+<section class="page" id="page6">
+    <h1 class="hbd-title">HBD</h1>
+    <button onclick="showPage(1)">ออก</button>
 </section>
 
 <script>
 let candleBlown = false;
 let surpriseTimer = null;
 let messageHasBeenSent = false;
+let envelopeStep = 0;
+const envelopeTotalSteps = 4;
 
 /* CHANGE PAGE */
 
 function showPage(pageNumber) {
     if (pageNumber === 5 && !messageHasBeenSent) {
+        return;
+    }
+    if (pageNumber === 6 && (envelopeStep < envelopeTotalSteps || !messageHasBeenSent)) {
         return;
     }
 
@@ -799,6 +918,29 @@ function showPage(pageNumber) {
         for (let i = 0; i < 18; i++) {
             setTimeout(createHeart, i * 120);
         }
+    }
+}
+
+/* OPEN ENVELOPE IN FOUR STEPS */
+function openEnvelopeStep() {
+    if (envelopeStep >= envelopeTotalSteps) return;
+    envelopeStep++;
+
+    const stage = document.getElementById("envelopeStage");
+    const art = document.getElementById("revealArt");
+    const progress = Math.round((envelopeStep / envelopeTotalSteps) * 100);
+    art.style.clipPath = `inset(${100 - progress}% 0 0 0)`;
+    stage.classList.add("opened");
+    document.getElementById("revealProgress").textContent = `ภาพที่ซ่อนอยู่ ${progress}%`;
+
+    if (envelopeStep < envelopeTotalSteps) {
+        document.getElementById("openEnvelopeButton").textContent = "เปิดต่ออีกนิด";
+        document.getElementById("envelopeHint").textContent = "ค่อย ๆ เปิดไปทีละนิด ภาพกำลังเผยออกมาแล้ว";
+    } else {
+        document.getElementById("openEnvelopeButton").style.display = "none";
+        document.getElementById("lastPageButton").style.display = "inline-block";
+        document.getElementById("envelopeHint").textContent = "เปิดครบแล้ว ขอให้วันนี้เป็นวันที่พิเศษนะ ♡";
+        for (let i = 0; i < 12; i++) setTimeout(createHeart, i * 140);
     }
 }
 
@@ -962,8 +1104,8 @@ async function sendMessage() {
 
         messageHasBeenSent = true;
         finalButton.disabled = false;
-        status.textContent = "เรียบร้อย! ขอบคุณหนูมากเยยนะ ไม่ว่าจะเขียนอะไรก็ตาม ไปหน้าต่อไปได้เยย พี่รออ่านข้อความหนูอยู่น้าาา^^";
-        lockStatus.textContent = "ปลดล็อกแย้วว ไปดูหน้าสุดท้ายได้เยย!";
+        status.textContent = "ส่งคำขอแล้ว! ลองตรวจดูใน Google Sheets ได้เลย หากยังไม่ขึ้นให้ลองส่งอีกครั้งนะ";
+        lockStatus.textContent = "ปลดล็อกแล้วว ไปดูหน้าสุดท้ายได้เลย!";
     } catch (error) {
         console.error("ส่งข้อความออนไลน์ไม่สำเร็จ:", error);
         messageHasBeenSent = false;
