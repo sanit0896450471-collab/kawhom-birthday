@@ -720,6 +720,7 @@ textarea:focus { border-color: #91d8f5; }
 
             <p>
                 มาเข้าสู่โหมดซึ้ง536365
+                อันนี้น่าจะเป็นเเฮปๆผสมกับวันครบรอบเลาด้วยเยยเพราะมันก็อยู่ตอดกันเยยอะเนอะะ
                 ก็นะะ ขอบคุณน้องหอมมากนะที่อยู่กับพี่มาจนถึงตอนนี้น้าา
                 เเต่ไม่รู้เหมือนกันว่าจะมีอะไรอีกเพราะข้อความนี้พี่เขียนตอนตี4:40
                 ของวันที่ 19 หละ56555 ล่วงหน้าเยอะมากกก ก่อนวันครบรอบเราซะอีก
@@ -812,7 +813,7 @@ textarea:focus { border-color: #91d8f5; }
             ทีนี้ถึงตาหนุเเล้วว เขียนบอกเล่าเกี่ยวกับพี่เต้หน่อยสิิ
             ว่าพี่เป็นยังไงตลอด คสพ ของเราที่ผ่านมา หนูรู้สึกยังไงกับพี่บ้าง
             ชอบอะไรในตัวพี่บ้างง อยากให้พี่ปรับปรุงอยากให้ทำอะไรเพิ่มไหมม
-            หรือบอกข้อดีข้อเสียพี่ด้วยจะดีมั้ก 
+            บอกมาได้เยยย อย่าปิดบังนะเว่ยย😠😠😠
         </p>
 
         <textarea
@@ -844,7 +845,7 @@ textarea:focus { border-color: #91d8f5; }
 <section class="page" id="page5">
     <div class="envelope-card">
         <h1>จดหมายฉบับสุดท้าย ♡</h1>
-        <p id="envelopeHint">กดเปิดซองจดหมาย แล้วภาพพิเศษจะค่อย ๆ ปรากฏออกมานะ</p>
+        <p id="envelopeHint">กดเปิดซองจดหมาย แล้วภาพพิเศษออกมานะเว่ยยยย</p>
 
         <div class="envelope-stage" id="envelopeStage">
             <div class="reveal-frame">
@@ -970,13 +971,13 @@ function startHbdCooldown() {
     hbdCooldownInterval = setInterval(() => {
         secondsLeft--;
         if (secondsLeft > 0) {
-            button.textContent = `ไปหน้า HBD ได้ใน ${secondsLeft} วิ`;
+            button.textContent = `เป็งไงงงงภาพที่พี่วาดด ${secondsLeft} วิ`;
         } else {
             clearInterval(hbdCooldownInterval);
             hbdCooldownInterval = null;
             hbdCooldownComplete = true;
             button.disabled = false;
-            button.textContent = "ไปหน้าสุดท้าย HBD";
+            button.textContent = "ending HBD";
         }
     }, 1000);
 }
@@ -1081,9 +1082,9 @@ function messageEdited() {
     messageHasBeenSent = false;
     document.getElementById("finalButton").disabled = true;
     document.getElementById("sendStatus").textContent =
-        "ข้อความเปลี่ยนแล้ว กดส่งข้อความอีกครั้งก่อนน้า";
+        "ข้อความเปลี่ยนแล้ว กดส่งข้อความอีกครั้งก่อนนะคับบคนสวยย";
     document.getElementById("lockStatus").textContent =
-        "หน้าสุดท้ายล็อกอยู่ ต้องส่งข้อความล่าสุดก่อน";
+        "หน้าสุดท้ายล็อกอยู่ ต้องส่งข้อความล่าสุดก่อนง่ะ";
 }
 
 /* SEND MESSAGE TO GOOGLE APPS SCRIPT AND UNLOCK THE FINAL PAGE */
@@ -1103,7 +1104,7 @@ async function sendMessage() {
     if (!message) {
         messageHasBeenSent = false;
         finalButton.disabled = true;
-        status.textContent = "ยังไม่มีข้อความเลยย เขียนก่อนน้า";
+        status.textContent = "ยังไม่มีข้อความเลยย เขียนก่อนดิิิ";
         lockStatus.textContent = "หน้าสุดท้ายยังล็อกอยู่";
         return;
     }
@@ -1141,8 +1142,8 @@ async function sendMessage() {
 
         messageHasBeenSent = true;
         finalButton.disabled = false;
-        status.textContent = "ส่งคำขอแล้ว! ลองตรวจดูใน Google Sheets ได้เลย หากยังไม่ขึ้นให้ลองส่งอีกครั้งนะ";
-        lockStatus.textContent = "ปลดล็อกแล้วว ไปดูหน้าสุดท้ายได้เลย!";
+        status.textContent = "ส่งไปลิ้วว ขอบคุณมากเยยน้าา อยากรู้จังหนูเขียนอะไยมาบ้างง👀";
+        lockStatus.textContent = "ปลดล็อกแยะ ปัยกันต่อออ";
     } catch (error) {
         console.error("ส่งข้อความออนไลน์ไม่สำเร็จ:", error);
         messageHasBeenSent = false;
